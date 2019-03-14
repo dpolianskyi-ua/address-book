@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Accommodation {
     private long id;
+    //TODO:
     private long addressId;
     private long personId;
     private LocalDate accommodationDate;
