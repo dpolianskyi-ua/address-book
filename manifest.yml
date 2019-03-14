@@ -1,0 +1,8 @@
+---
+applications:
+  - name: address-book
+    path: build/libs/address-book.jar
+    routes:
+      - route: address-book-dp.cfapps.io
+    env:
+      WELCOME_MESSAGE: Hello from the review environment

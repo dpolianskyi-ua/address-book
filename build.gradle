@@ -1,0 +1,32 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "2.1.1.RELEASE"
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springBootVersion = '2.1.1.RELEASE'
+    jacksonDatatypeJsr310Version = '2.9.8'
+    lombokVersion = '1.18.4'
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDatatypeJsr310Version")
+
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+
+    testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+}
+
+bootRun.environment([
+        "WELCOME_MESSAGE": "hello",
+])
+
+test.environment([
+        "WELCOME_MESSAGE": "Hello from test",
+])
