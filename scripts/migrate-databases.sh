@@ -2,19 +2,23 @@
 set -e
 
 app_guid=`cf app address-book --guid`
+
+echo "Application GUID: $app_guid"
+
 credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name=="$2") | .credentials'`
+
+echo "$2 Credentials"
+echo $credentials
 
 ip_address=`echo $credentials | jq -r '.hostname'`
 db_name=`echo $credentials | jq -r '.name'`
 db_username=`echo $credentials | jq -r '.username'`
 db_password=`echo $credentials | jq -r '.password'`
 
-echo "appguid"
-echo "GUID: $app_guid"
-echo $app_guid
-
-echo "credentials"
-echo $credentials
+echo "Address: $ip_address"
+echo "Name: $db_name"
+echo "Username: $db_username"
+echo "Password: **********"
 
 echo "Opening ssh tunnel to $ip_address"
 cf ssh -N -L 63306:$ip_address:3306 address-book &
