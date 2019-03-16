@@ -9,6 +9,11 @@ db_name=`echo $credentials | jq -r '.name'`
 db_username=`echo $credentials | jq -r '.username'`
 db_password=`echo $credentials | jq -r '.password'`
 
+echo "$ip_address"
+echo "$db_name"
+echo "$db_username"
+echo "$db_password"
+
 echo "Opening ssh tunnel to $ip_address"
 cf ssh -N -L 63306:$ip_address:3306 address-book &
 cf_ssh_pid=$!
