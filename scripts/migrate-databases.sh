@@ -7,7 +7,7 @@ echo "Application GUID: $app_guid"
 
 credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name == "ab-d") .credentials'`
 
-echo "##### $2 Credentials #####"
+echo "###### $2 Credentials ######"
 echo $credentials
 
 ip_address=`echo $credentials | jq -r '.hostname'`
