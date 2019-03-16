@@ -16,7 +16,6 @@ jobs:
       install: skip
       before_script:
         - mysql -uroot < databases/address-book/CREATE_DATABASE.sql
-        - mysql -uaddress-book < databases/address-book/SHOW_DATABASES.sql
         - curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.2.4/flyway-commandline-5.2.4-linux-x64.tar.gz | tar xvz
         - flyway-*/flyway -url="jdbc:mysql://localhost:3306/ADDRESS_BOOK_TEST" -locations=filesystem:databases/address-book -user=address-book -password="" clean migrate
       script: ./gradlew clean build

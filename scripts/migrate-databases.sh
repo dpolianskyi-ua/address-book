@@ -16,6 +16,6 @@ cf_ssh_pid=$!
 echo "Waiting for tunnel"
 sleep 5
 
-flyway-*/flyway -url="jdbc:mysql://127.0.0.1:63306/$db_name" -locations=filesystem:$2/databases/address-book -user=$db_username -password=$db_password migrate
+flyway-*/flyway -user=$db_username -password=$db_password -url="jdbc:mysql://127.0.0.1:63306/$db_name" -locations=filesystem:$2/databases/address-book/migrations migrate
 
 kill -STOP $cf_ssh_pid
