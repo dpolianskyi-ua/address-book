@@ -5,7 +5,7 @@ app_guid=`cf app $1 --guid`
 
 echo "Application GUID: $app_guid"
 
-credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name == "ab-d") .credentials'`
+credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name == "$2") .credentials'`
 
 echo "###### $2 Credentials ######"
 echo $credentials
