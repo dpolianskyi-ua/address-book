@@ -41,7 +41,7 @@ jobs:
       before_script:
         - ls
         - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s development
-        - scripts/migrate-databases.sh address-book .
+        - scripts/migrate-databases.sh address-book ab-new
       script:
         - echo "Downloading $RELEASE_TAG"
         - wget -P build/libs https://github.com/$GITHUB_USERNAME/address-book/releases/download/$RELEASE_TAG/address-book.jar
