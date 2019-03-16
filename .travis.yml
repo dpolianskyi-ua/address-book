@@ -29,7 +29,7 @@ jobs:
         api_key: $GITHUB_OAUTH_TOKEN
         file: "build/libs/address-book.jar"
         skip_cleanup: true
-    - stage: deploy to deployment
+    - stage: deploy to development
       language: java
       before_install:
         - wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
@@ -39,7 +39,7 @@ jobs:
         - sudo apt-get -y install jq
         - curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.1.1/flyway-commandline-5.1.1-linux-x64.tar.gz | tar xvz
       before_script:
-        - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s deployment
+        - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s development
         - scripts/migrate-databases.sh address-book .
       script:
         - echo "Downloading $RELEASE_TAG"
@@ -52,4 +52,4 @@ jobs:
         username: $CF_USERNAME
         password: $CF_PASSWORD
         organization: $CF_ORG
-        space: deployment
+        space: development
