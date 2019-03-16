@@ -5,7 +5,7 @@ app_guid=`cf app address-book --guid`
 
 echo "Application GUID: $app_guid"
 
-credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[]'`
+credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name=="$2")'`
 
 echo "##### $2 Credentials #####"
 echo $credentials
