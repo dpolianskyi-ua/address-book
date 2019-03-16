@@ -2,20 +2,17 @@
 set -e
 
 app_guid=`cf app $1 --guid`
-service_name=`echo $2`
 
 echo "Application GUID: $app_guid"
 
-credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name == $service_name) .credentials'`
-
-echo "###### $2 Credentials ######"
-echo $credentials
+credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name == "ab-d") .credentials'`
 
 ip_address=`echo $credentials | jq -r '.hostname'`
 db_name=`echo $credentials | jq -r '.name'`
 db_username=`echo $credentials | jq -r '.username'`
 db_password=`echo $credentials | jq -r '.password'`
 
+echo "###### $2 Credentials ######"
 echo "Address: $ip_address"
 echo "Name: $db_name"
 echo "Username: $db_username"
