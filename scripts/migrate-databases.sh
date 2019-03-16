@@ -10,8 +10,8 @@ db_username=`echo $credentials | jq -r '.username'`
 db_password=`echo $credentials | jq -r '.password'`
 
 echo "appguid"
-echo "GUID: $guid"
-echo $guid
+echo "GUID: $app_guid"
+echo $app_guid
 
 echo "credentials"
 echo $credentials
