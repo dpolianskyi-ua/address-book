@@ -39,6 +39,7 @@ jobs:
         - sudo apt-get -y install jq
         - curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.2.4/flyway-commandline-5.2.4-linux-x64.tar.gz | tar xvz
       before_script:
+        - ls
         - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s development
         - scripts/migrate-databases.sh address-book .
       script:
