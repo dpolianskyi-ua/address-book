@@ -28,7 +28,7 @@ jobs:
         api_key: $GITHUB_OAUTH_TOKEN
         file: "build/libs/address-book.jar"
         skip_cleanup: true
-    - stage: deploy to review
+    - stage: deploy to development
       language: java
       before_install:
         - wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
@@ -41,9 +41,9 @@ jobs:
         - echo "Downloading $RELEASE_TAG"
         - wget -P build/libs https://github.com/$GITHUB_USERNAME/address-book/releases/download/$RELEASE_TAG/address-book.jar
       before_deploy:
-        - echo "Deploying $RELEASE_TAG to review"
+        - echo "Deploying $RELEASE_TAG to development"
       before_script:
-        - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s review
+        - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s development
         - scripts/migrate-databases.sh address-book
       deploy:
         provider: cloudfoundry
@@ -51,4 +51,4 @@ jobs:
         username: $CF_USERNAME
         password: $CF_PASSWORD
         organization: $CF_ORG
-        space: review
+        space: development
